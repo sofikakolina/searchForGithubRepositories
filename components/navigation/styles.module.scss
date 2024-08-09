@@ -1,0 +1,27 @@
+$navbar-color: #00838F;
+$button-color: #2196F3;
+.navbar{
+    background-color: $navbar-color;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+    padding: 19px 0px 19px 32px;
+
+    button{
+        width: 105px;
+        height: 42px;
+        border-radius: 4px;
+        background-color: $button-color;
+        padding: 8px, 22px, 8px, 22px;
+        color: #ffffff
+    }
+
+    input{
+        width: 912px;
+        height: 42px;
+        border-radius: 4px;
+        padding-left: 16px;
+    }
+}
