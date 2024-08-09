@@ -5,9 +5,9 @@ import { useAppSelector } from '@/store/store'
 
 export default function Home() {
 
-  const persons = useAppSelector(state => state.person.persons)
+  const repositories = useAppSelector(state => state.repository.repositories)
 
-  if (!persons || persons.length==0) return (
+  if (!repositories || repositories.length==0) return (
     <div className="centering">
       <h1>Добро пожаловать</h1>
     </div>

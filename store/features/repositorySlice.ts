@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface Person{
+export interface Repository{
     id: number;
     name: string;
     language: string;
@@ -9,20 +9,20 @@ export interface Person{
     dateOfUpdate: string; 
 }
 
-interface PersonState{
-    persons: Person[];
+interface RepositoryState{
+    repositories: Repository[];
 }
 
-const initialState: PersonState={
-    persons: [],
+const initialState: RepositoryState={
+    repositories: [],
 }
 
-export const PersonSlice = createSlice({
-    name: "person",
+export const RepositorySlice = createSlice({
+    name: "repository",
     initialState,
     reducers:{
-        addPerson:(state, action:PayloadAction<{ id: number, name: string, language: string, numberOfForks: number, numberOfStars: number, dateOfUpdate: string }>)=>{
-            state.persons.push({
+        addRepository:(state, action:PayloadAction<Repository>)=>{
+            state.repositories.push({
                 id: action.payload.id,
                 name: action.payload.name,
                 language: action.payload.language,
@@ -34,5 +34,5 @@ export const PersonSlice = createSlice({
     }
 })
 
-export default PersonSlice.reducer;
-export const { addPerson } = PersonSlice.actions
+export default RepositorySlice.reducer;
+export const { addRepository } = RepositorySlice.actions

@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 import { addDetail } from '@/store/features/details'
 import { useAppDispatch } from '@/store/store'
 
-interface Person {
+interface Repository {
   id: number;
   name: string;
   language: string;
@@ -14,21 +14,21 @@ interface Person {
 }
 
 const Table = () => {
-  const persons = useAppSelector(state => state.person.persons)
+  const repositories = useAppSelector(state => state.repository.repositories)
   const dispatch = useAppDispatch()
 
-  const handleAddDetails = (person: Person) => {
+  const handleAddDetails = (repository: Repository) => {
     dispatch(addDetail({
-      id: person.id,
-      name: person.name,
-      language: person.language,
-      numberOfForks: person.numberOfForks,
-      numberOfStars: person.numberOfStars,
-      dateOfUpdate: person.dateOfUpdate // Дата уже должна быть в правильном формате
+      id: repository.id,
+      name: repository.name,
+      language: repository.language,
+      numberOfForks: repository.numberOfForks,
+      numberOfStars: repository.numberOfStars,
+      dateOfUpdate: repository.dateOfUpdate // Дата уже должна быть в правильном формате
     }))
   }
 
-  if (persons.length === 0) {
+  if (repositories.length === 0) {
     return <p>Загрузка...</p> // Показать временный контент
   }
 
@@ -46,13 +46,13 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {persons.map((person: Person) => (
-            <tr key={person.id} className={styles.tableLine} onClick={() => handleAddDetails(person)}>
-              <td className={styles.cell}>{person.name}</td>
-              <td className={styles.cell}>{person.language}</td>
-              <td className={styles.cell}>{person.numberOfForks}</td>
-              <td className={styles.cell}>{person.numberOfStars}</td>
-              <td className={styles.cell}>{new Date(person.dateOfUpdate).toLocaleDateString("en-GB")}</td>
+          {repositories.map((repository: Repository) => (
+            <tr key={repository.id} className={`${styles.tableLine} cursor-pointer`} onClick={() => handleAddDetails(repository)}>
+              <td className={styles.cell}>{repository.name}</td>
+              <td className={styles.cell}>{repository.language}</td>
+              <td className={styles.cell}>{repository.numberOfForks}</td>
+              <td className={styles.cell}>{repository.numberOfStars}</td>
+              <td className={styles.cell}>{new Date(repository.dateOfUpdate).toLocaleDateString("en-GB")}</td>
             </tr>
           ))}
         </tbody>

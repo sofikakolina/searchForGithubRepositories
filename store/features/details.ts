@@ -19,7 +19,7 @@ const initialState: Detail={
 }
 
 export const DetailSlice = createSlice({
-    name: "detail",
+    name: "details",
     initialState,
     reducers:{
         addDetail:(state, action:PayloadAction<Detail>)=>{

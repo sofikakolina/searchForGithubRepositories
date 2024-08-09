@@ -4,7 +4,8 @@ import { useState } from 'react'
 import styles from './styles.module.scss'
 import axios from 'axios'
 import { useAppDispatch } from '@/store/store'
-import { addPerson } from '@/store/features/personSlice'
+import { addRepository } from '@/store/features/repositorySlice'
+import { Repository } from '@/store/features/repositorySlice'
 
 const Navbar = () => {
   const [search, setSearch] = useState("")
@@ -24,7 +25,7 @@ const Navbar = () => {
       
       const repositories = response.data.items;
 
-      repositories.map((repository: { id:number, name: any; language: any; forks_count: any; stargazers_count: any; updated_at: string | number | Date }) => handleAddPerson({
+      repositories.map((repository: { id:number, name: any; language: any; forks_count: any; stargazers_count: any; updated_at: string | number | Date }) => handleAddRepository({
           id: repository.id,
           name: repository.name,
           language: repository.language,
@@ -38,12 +39,9 @@ const Navbar = () => {
     }
   }
 
-  const handleAddPerson = (repository: {
-    id: number, name: string; language: string
-    numberOfForks: number; numberOfStars: number; dateOfUpdate: string
-  }) =>{
+  const handleAddRepository = (repository: Repository) =>{
     // e.preventDefault()
-    dispatch(addPerson({ id: repository.id, name:repository.name, language:repository.language, numberOfForks:repository.numberOfForks, numberOfStars:repository.numberOfStars, dateOfUpdate:repository.dateOfUpdate}))
+    dispatch(addRepository({ id: repository.id, name:repository.name, language:repository.language, numberOfForks:repository.numberOfForks, numberOfStars:repository.numberOfStars, dateOfUpdate:repository.dateOfUpdate}))
   }
 
   return (
