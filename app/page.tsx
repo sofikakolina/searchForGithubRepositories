@@ -14,11 +14,11 @@ export default function Home() {
   )
 
   return (
-    <div className="grid grid-cols-3">
+    <div className="main-window grid grid-cols-3">
       <div className='col-span-2'>
         <Table />
       </div>
-      <div className='col-span-1'>
+      <div className='col-span-1 bg-details'>
         <Details />
       </div>
     </div>

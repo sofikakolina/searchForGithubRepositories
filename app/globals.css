@@ -28,3 +28,14 @@
   align-items: center;    
   height: calc(100vh - 80px); 
 }
+
+.centering-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  height: calc(100%); 
+} 
+
+.main-window{
+  height: calc(100vh - 80px);
+}
