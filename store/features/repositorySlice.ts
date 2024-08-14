@@ -7,6 +7,8 @@ export interface Repository{
     numberOfForks: number;
     numberOfStars: number;
     dateOfUpdate: string; 
+    topics: Array<string>; 
+    license: any;
 }
 
 interface RepositoryState{
@@ -29,10 +31,27 @@ export const RepositorySlice = createSlice({
                 numberOfForks: action.payload.numberOfForks,
                 numberOfStars: action.payload.numberOfStars,
                 dateOfUpdate: action.payload.dateOfUpdate,
+                topics: action.payload.topics,
+                license: action.payload.license,
             })
-        }
+        },
+        deleteRepositories:(state)=>{
+            state.repositories = []
+        },
+        sortRepositories:(state, action:PayloadAction<{ sortDown: boolean }>)=>{
+            var sortDown = action.payload.sortDown
+            state.repositories.sort(function (a, b) {
+                if (a.name > b.name) {
+                  return sortDown ? 1 : -1;
+                }
+                if (a.name < b.name) {
+                  return sortDown ? -1 : 1;
+                }
+                return 0;
+              });
+        },
     }
 })
 
 export default RepositorySlice.reducer;
-export const { addRepository } = RepositorySlice.actions
+export const { addRepository, deleteRepositories, sortRepositories } = RepositorySlice.actions
