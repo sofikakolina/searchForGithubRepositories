@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { Repository } from "./repositorySlice";
 export interface Detail{
     id: number;
     name: string;
@@ -7,6 +7,8 @@ export interface Detail{
     numberOfForks: number;
     numberOfStars: number;
     dateOfUpdate: string; 
+    topics: Array<string>; 
+    license: string
 }
 
 const initialState: Detail={
@@ -16,9 +18,11 @@ const initialState: Detail={
     numberOfForks: 0,
     numberOfStars: 0,
     dateOfUpdate: "",
+    topics: [],
+    license: ""
 }
 
-export const DetailSlice = createSlice({
+export const Details = createSlice({
     name: "details",
     initialState,
     reducers:{
@@ -29,9 +33,12 @@ export const DetailSlice = createSlice({
             state.numberOfForks = action.payload.numberOfForks
             state.numberOfStars = action.payload.numberOfStars
             state.dateOfUpdate = action.payload.dateOfUpdate
+            state.topics = action.payload.topics
+            state.license = action.payload.license
+            console.log(action.payload.license)
         }
     }
 })
 
-export default DetailSlice.reducer;
-export const { addDetail } = DetailSlice.actions
+export default Details.reducer;
+export const { addDetail } = Details.actions

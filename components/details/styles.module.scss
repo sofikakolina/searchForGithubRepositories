@@ -1,16 +1,57 @@
-.cell{
-    text-align: start;
-}    
 
-.cellHead{
-    text-align: start;
-}
 
-.table{
-    width: 100%;
-}
+.main{
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
 
-.tableLine{
-    border-bottom: 1px solid #000000;
-    padding: 10px 0px 10px;
+    .name{
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 40px;
+    }
+    .cell{
+        text-align: start;
+    }    
+
+    .language{
+        @extend .cell;
+        text-align: start;
+        background-color: rgba(33, 150, 243, 1);
+        border-radius: 100px;
+        padding: 3px 6px 3px 6px;
+        color: #fff;
+    }    
+    
+    .cellHead{
+        text-align: start;
+    }
+    
+    .languageAndStars{
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+
+        div {
+            display: flex;
+            gap: 8px;
+        }
+    }
+
+    .table{
+        width: 100%;
+    }
+    
+    .tableLine{
+        border-bottom: 1px solid #000000;
+        padding: 10px 0px 10px;
+    }
+    
+    .topic{
+        background-color: rgba(0, 0, 0, 0.08);
+        border-radius: 100px;
+        padding: 3px 4px 3px 4px;
+    }
+    
 }
