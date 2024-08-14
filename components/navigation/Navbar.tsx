@@ -1,47 +1,56 @@
-'use client'
-
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import axios from 'axios'
-import { useAppDispatch } from '@/store/store'
-import { addRepository } from '@/store/features/repositorySlice'
+import { useAppDispatch, useAppSelector } from '@/store/store'
+import { addRepository, deleteRepositories } from '@/store/features/repositorySlice'
 import { Repository } from '@/store/features/repositorySlice'
+import { addTotal } from '@/store/features/pagination'
 
 const Navbar = () => {
   const [search, setSearch] = useState("")
   const dispatch = useAppDispatch()
-
+  const page = useAppSelector(state => state.pagination.page)
+  const size = useAppSelector(state => state.pagination.size)
   const handleSearchRepo = async() =>{
     try{
       const response  = await axios.get('https://api.github.com/search/repositories', {
         params: {
-          q: search || 'tor',
+          q: search,
           sort: 'stars',  // Можно использовать другие значения: forks, updated
           order: 'desc',  // Порядок сортировки: asc или desc
-          per_page: 10,   // Количество репозиториев на страницу
-          page: 1         // Номер страницы
+          per_page: size,   // Количество репозиториев на страницу
+          page: page         // Номер страницы
         }
       })      
       
       const repositories = response.data.items;
+      console.log(repositories)
+      dispatch(deleteRepositories())
 
-      repositories.map((repository: { id:number, name: any; language: any; forks_count: any; stargazers_count: any; updated_at: string | number | Date }) => handleAddRepository({
+      repositories.map((repository: { id:number, name: string; language: string; forks_count: number; stargazers_count: number; updated_at: string | number | Date, topics: Array<string>, license: any }) => handleAddRepository({
           id: repository.id,
           name: repository.name,
           language: repository.language,
           numberOfForks: repository.forks_count,
           numberOfStars: repository.stargazers_count,
           dateOfUpdate: new Date(repository.updated_at).toLocaleDateString("en-GB"),
+          topics: repository.topics,
+          license: repository.license?.name,
       }));
+
+      dispatch(addTotal({ total: response.data.total_count}))
 
     } catch(error){
       console.log(error)
     }
   }
 
+  useEffect(() => {
+    if (search) handleSearchRepo()
+  }, [page, size])
+
   const handleAddRepository = (repository: Repository) =>{
-    // e.preventDefault()
-    dispatch(addRepository({ id: repository.id, name:repository.name, language:repository.language, numberOfForks:repository.numberOfForks, numberOfStars:repository.numberOfStars, dateOfUpdate:repository.dateOfUpdate}))
+    dispatch(addRepository({ id: repository.id, name:repository.name, language:repository.language, numberOfForks:repository.numberOfForks, numberOfStars:repository.numberOfStars, dateOfUpdate:repository.dateOfUpdate, topics: repository.topics, license: repository.license}))
   }
 
   return (

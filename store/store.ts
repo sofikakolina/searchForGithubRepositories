@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { RepositorySlice } from "./features/repositorySlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { DetailSlice } from "./features/details";
+import { RepositorySlice } from "./features/repositorySlice";
+import { Details } from "./features/details";
+import { Pagination } from "./features/pagination";
+
 export const store = configureStore({
     reducer:{
-        details: DetailSlice.reducer,
-        repository: RepositorySlice.reducer
+        details: Details.reducer,
+        repository: RepositorySlice.reducer,
+        pagination: Pagination.reducer,
     }
 })
 
