@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styles from "./pagination.module.scss";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useAppDispatch, useAppSelector } from '@/store/store'
@@ -17,6 +16,7 @@ const Pagination = () => {
   const handleMinusPage = () => {
     dispatch(addPage({ page: page-1 }))
   };
+
   const handlePlusPage = () => {
     dispatch(addPage({ page: page+1 }))
   };

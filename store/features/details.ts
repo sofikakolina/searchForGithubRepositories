@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Repository } from "./repositorySlice";
+
 export interface Detail{
     id: number;
     name: string;
@@ -35,7 +35,6 @@ export const Details = createSlice({
             state.dateOfUpdate = action.payload.dateOfUpdate
             state.topics = action.payload.topics
             state.license = action.payload.license
-            console.log(action.payload.license)
         }
     }
 })

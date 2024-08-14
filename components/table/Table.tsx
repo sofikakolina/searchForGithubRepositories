@@ -11,11 +11,8 @@ import { useState } from 'react'
 
 const Table = () => {
   const repositories = useAppSelector(state => state.repository.repositories)
-
-  console.log(repositories)
-  
   const dispatch = useAppDispatch()
-  const [ push, setPush ] = useState(true)
+  const [push, setPush] = useState(true)
   const handleAddDetails = (repository: Repository) => {
     dispatch(addDetail({
       id: repository.id,
@@ -35,7 +32,7 @@ const Table = () => {
   }
 
   if (repositories.length === 0) {
-    return <p>Загрузка...</p> // Показать временный контент
+    return <p>По данным параметрам у нас нет для Вас репозиторий</p>
   }
 
   return (
@@ -45,7 +42,7 @@ const Table = () => {
         <table className={styles.table}>
           <thead>
             <tr className={styles.tableLine}>
-              <th className={styles.cellHead}><button onClick={handlePush}>{push ? <FaArrowUp/> : <FaArrowDown/>}Название</button></th>
+              <th className={styles.cellHead}><button onClick={handlePush}>{push ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Название</button></th>
               <th className={styles.cellHead}>Язык</th>
               <th className={styles.cellHead}>Число форков</th>
               <th className={styles.cellHead}>Число звезд</th>
@@ -59,13 +56,13 @@ const Table = () => {
                 <td className={styles.cell}>{repository.language}</td>
                 <td className={styles.cell}>{repository.numberOfForks}</td>
                 <td className={styles.cell}>{repository.numberOfStars}</td>
-                <td className={styles.cell}>{new Date(repository.dateOfUpdate).toLocaleDateString("en-GB")}</td>
+                <td className={styles.cell}>{repository.dateOfUpdate}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className={styles.pagination}>
+      <div>
         <Pagination/>
       </div>
     </div>

@@ -12,10 +12,10 @@ const Details = () => {
             </div>
         )
     }
+
     return (
         <div className={styles.main}>
             <h2 className={styles.name}>{details.name}</h2>
-
             <div className={styles.languageAndStars}>
                 {details.language && <h4 className={styles.language}>{details.language}</h4>}
                 <div>
@@ -23,13 +23,11 @@ const Details = () => {
                     <h4 className={styles.cell}>{details.numberOfStars}</h4>
                 </div>
             </div>
-
-            { details.topics?.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+            {details.topics?.length > 0 && (
+                <div className={styles.details}>
                     {details.topics.map(topic => <h3 className={styles.topic}>{topic}</h3>)}
                 </div>
             )}
-
             <h5>{details.license}</h5>
         </div>
     )

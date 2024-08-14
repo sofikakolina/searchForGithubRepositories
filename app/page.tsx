@@ -4,12 +4,11 @@ import Table from '@/components/table/Table'
 import { useAppSelector } from '@/store/store'
 
 export default function Home() {
-
   const repositories = useAppSelector(state => state.repository.repositories)
 
   if (!repositories || repositories.length==0) return (
     <div className="centering">
-      <h1>Добро пожаловать</h1>
+      <h1 className='welcome-text'>Добро пожаловать</h1>
     </div>
   )
 

@@ -53,5 +53,11 @@
         border-radius: 100px;
         padding: 3px 4px 3px 4px;
     }
+
+    .details{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
     
 }
