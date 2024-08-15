@@ -26,6 +26,7 @@ export const Details = createSlice({
     name: "details",
     initialState,
     reducers:{
+        //reducer для добавления деалей о репозитории в state
         addDetail:(state, action:PayloadAction<Detail>)=>{
             state.id = action.payload.id
             state.name = action.payload.name

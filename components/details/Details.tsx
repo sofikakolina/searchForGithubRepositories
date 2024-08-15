@@ -4,7 +4,8 @@ import styles from "./styles.module.scss"
 import { FaStar } from "react-icons/fa";
 
 const Details = () => {
-    const details = useAppSelector(state => state.details);  // Используем `details` как в store
+    const details = useAppSelector(state => state.details); 
+    
     if (!details.name) {
         return (
             <div className='centering'>

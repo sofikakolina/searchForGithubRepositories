@@ -12,6 +12,7 @@ const Navbar = () => {
   const page = useAppSelector(state => state.pagination.page)
   const size = useAppSelector(state => state.pagination.size)
 
+  //функция для api запроса к github
   const handleSearchRepo = async (event?: React.FormEvent<HTMLFormElement>) => {
     if (event) event.preventDefault();
     try{
@@ -42,10 +43,12 @@ const Navbar = () => {
     }
   }
 
+  //функция для повторени api запроса в случае изменения page или size
   useEffect(() => {
     if (search) handleSearchRepo()
   }, [page, size])
 
+  //функция для добавлени репозитория в redux хранилище 
   const handleAddRepository = (repository: Repository) =>{
     dispatch(addRepository({ id: repository.id, name:repository.name, language:repository.language, numberOfForks:repository.numberOfForks, numberOfStars:repository.numberOfStars, dateOfUpdate:repository.dateOfUpdate, topics: repository.topics, license: repository.license}))
   }

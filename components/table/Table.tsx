@@ -16,6 +16,8 @@ const Table = () => {
   const [pushForks, setPushForks] = useState(true)
   const [pushStars, setPushStars] = useState(true)
   const [pushDate, setPushDate] = useState(true)
+
+  //функция для добавления деталей о репозитории при нажатии на него в redux 
   const handleAddDetails = (repository: Repository) => {
     dispatch(addDetail({
       id: repository.id,
@@ -29,10 +31,10 @@ const Table = () => {
     }))
   }
 
+  //функция для обращения к сортировке в хранилище redux, передает нужную колонку для сортировки, а также направление сортировки
   const handlePush = (push:boolean, setPush:any, column: keyof Repository) =>{
     setPush((prev: any) => !prev)
     dispatch(sortRepositories({ sortDown: push, column }));
-
   }
 
   if (repositories.length === 0) {

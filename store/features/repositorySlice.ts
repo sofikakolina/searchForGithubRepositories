@@ -23,6 +23,7 @@ export const RepositorySlice = createSlice({
     name: "repository",
     initialState,
     reducers:{
+        //reducer для добавления репозитория в массив state
         addRepository:(state, action:PayloadAction<Repository>)=>{
             state.repositories.push({
                 id: action.payload.id,
@@ -35,12 +36,13 @@ export const RepositorySlice = createSlice({
                 license: action.payload.license,
             })
         },
+        //reducer для очищения массива репозиториев при новом api запросе
         deleteRepositories:(state)=>{
             state.repositories = []
         },
+        //reducer для сорировки репозиториев по name, numberOfForks, numberOfStars, dateOfUpdate
         sortRepositories: (state, action: PayloadAction<{ sortDown: boolean, column: keyof Repository }>) => {
             const { sortDown, column } = action.payload;
-        
             state.repositories.sort((a, b) => {
                 let aValue = a[column];
                 let bValue = b[column];

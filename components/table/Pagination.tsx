@@ -9,14 +9,15 @@ const Pagination = () => {
   const total = useAppSelector(state => state.pagination.total)
   const dispatch = useAppDispatch()
 
+  //функция для изменения size в redux
   const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(addSize({ size: parseInt(event.target.value) }))
   };
-
+  //функция для изменения page в меньшую сторону в redux
   const handleMinusPage = () => {
     dispatch(addPage({ page: page-1 }))
   };
-
+  //функция для изменения page в большую в redux
   const handlePlusPage = () => {
     dispatch(addPage({ page: page+1 }))
   };
