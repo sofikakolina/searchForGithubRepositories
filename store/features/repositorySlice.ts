@@ -38,17 +38,28 @@ export const RepositorySlice = createSlice({
         deleteRepositories:(state)=>{
             state.repositories = []
         },
-        sortRepositories:(state, action:PayloadAction<{ sortDown: boolean }>)=>{
-            var sortDown = action.payload.sortDown
-            state.repositories.sort(function (a, b) {
-                if (a.name > b.name) {
-                  return sortDown ? 1 : -1;
+        sortRepositories: (state, action: PayloadAction<{ sortDown: boolean, column: keyof Repository }>) => {
+            const { sortDown, column } = action.payload;
+        
+            state.repositories.sort((a, b) => {
+                let aValue = a[column];
+                let bValue = b[column];
+                if (column === 'dateOfUpdate') {
+                    const parseDate = (dateString: string) => {
+                        const [day, month, year] = dateString.split('.').map(Number);
+                        return new Date(year, month - 1, day).getTime();
+                    };
+                    aValue = parseDate(a.dateOfUpdate);
+                    bValue = parseDate(b.dateOfUpdate);
                 }
-                if (a.name < b.name) {
-                  return sortDown ? -1 : 1;
+                if (aValue > bValue) {
+                    return sortDown ? 1 : -1;
+                }
+                if (aValue < bValue) {
+                    return sortDown ? -1 : 1;
                 }
                 return 0;
-              });
+            });
         },
     }
 })

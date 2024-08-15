@@ -13,6 +13,9 @@ const Table = () => {
   const repositories = useAppSelector(state => state.repository.repositories)
   const dispatch = useAppDispatch()
   const [push, setPush] = useState(true)
+  const [pushForks, setPushForks] = useState(true)
+  const [pushStars, setPushStars] = useState(true)
+  const [pushDate, setPushDate] = useState(true)
   const handleAddDetails = (repository: Repository) => {
     dispatch(addDetail({
       id: repository.id,
@@ -26,9 +29,10 @@ const Table = () => {
     }))
   }
 
-  const handlePush = () =>{
-    setPush(prev => !prev)
-    dispatch(sortRepositories({sortDown: push}))
+  const handlePush = (push:boolean, setPush:any, column: keyof Repository) =>{
+    setPush((prev: any) => !prev)
+    dispatch(sortRepositories({ sortDown: push, column }));
+
   }
 
   if (repositories.length === 0) {
@@ -42,11 +46,11 @@ const Table = () => {
         <table className={styles.table}>
           <thead>
             <tr className={styles.tableLine}>
-              <th className={styles.cellHead}><button onClick={handlePush}>{push ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Название</button></th>
+              <th className={styles.cellHead}><button onClick={() => handlePush(push, setPush, "name")}>{push ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Название</button></th>
               <th className={styles.cellHead}>Язык</th>
-              <th className={styles.cellHead}>Число форков</th>
-              <th className={styles.cellHead}>Число звезд</th>
-              <th className={styles.cellHead}>Дата обновления</th>
+              <th className={styles.cellHead}><button onClick={() => handlePush(pushForks, setPushForks, "numberOfForks")}>{pushForks ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Число форков</button></th>
+              <th className={styles.cellHead}><button onClick={() => handlePush(pushStars, setPushStars, "numberOfStars")}>{pushStars ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Число звезд</button></th>
+              <th className={styles.cellHead}><button onClick={() => handlePush(pushDate, setPushDate, "dateOfUpdate")}>{pushDate ? <FaArrowUp color='#737272'/> : <FaArrowDown color='#737272'/>}Дата обновления</button></th>
             </tr>
           </thead>
           <tbody>
